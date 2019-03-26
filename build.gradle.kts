@@ -2,6 +2,10 @@ plugins {
     `java-library`
     groovy
     id("nebula.release") version "9.2.0"
+    id("nebula.maven-publish") version "9.5.0"
+    id("nebula.source-jar") version "9.5.0"
+    id("nebula.test-jar") version "9.5.0"
+    id("nebula.javadoc-jar") version "9.5.0"
 }
 
 repositories {
