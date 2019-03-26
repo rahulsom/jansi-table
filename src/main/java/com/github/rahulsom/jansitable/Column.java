@@ -1,7 +1,7 @@
 package com.github.rahulsom.jansitable;
 
 public class Column {
-    static enum Alignment {
+    enum Alignment {
         LEFT, RIGHT
     }
 

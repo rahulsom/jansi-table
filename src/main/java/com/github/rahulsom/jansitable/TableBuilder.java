@@ -13,30 +13,30 @@ public class TableBuilder {
     private int padding = 1;
     private OutputStream out = System.out;
 
-    TableBuilder addColumn(Column column) {
+    public TableBuilder addColumn(Column column) {
         columns.add(column);
         return this;
     }
 
-    TableBuilder addColumn(int width, Column.Alignment alignment) {
+    public TableBuilder addColumn(int width, Column.Alignment alignment) {
         return addColumn(new Column(width, alignment));
     }
 
-    TableBuilder addColumn(int width) {
+    public TableBuilder addColumn(int width) {
         return addColumn(new Column(width));
     }
 
-    TableBuilder padding(int padding) {
+    public TableBuilder padding(int padding) {
         this.padding = padding;
         return this;
     }
 
-    TableBuilder writeTo(OutputStream out) {
+    public TableBuilder writeTo(OutputStream out) {
         this.out = out;
         return this;
     }
 
-    Table build() {
+    public Table build() {
         return new Table(columns, padding, new PrintStream(out));
     }
 }

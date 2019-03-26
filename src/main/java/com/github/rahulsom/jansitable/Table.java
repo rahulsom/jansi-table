@@ -14,7 +14,7 @@ public class Table {
     private final int padding;
     private final PrintStream out;
 
-    public Table(List<Column> columns, int padding, PrintStream out) {
+    Table(List<Column> columns, int padding, PrintStream out) {
         this.columns = columns;
         this.padding = padding;
         this.out = out;
@@ -28,15 +28,15 @@ public class Table {
     private static final char H_BORDER = '─';
     private static final char V_BORDER = '│';
 
-    Table printHeader() {
+    public Table printHeader() {
         return line(INTERSECTIONS[0]);
     }
 
-    Table printDivider() {
+    public Table printDivider() {
         return line(INTERSECTIONS[1]);
     }
 
-    Table printFooter() {
+    public Table printFooter() {
         return line(INTERSECTIONS[2]);
     }
 
@@ -67,7 +67,7 @@ public class Table {
         return this;
     }
 
-    Table print(Object... data) {
+    public Table print(Object... data) {
         assert data.length == columns.size();
         Ansi ansi = Ansi.ansi();
         for (int i = 0; i <= columns.size(); i++) {
