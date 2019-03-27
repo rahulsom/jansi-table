@@ -40,30 +40,26 @@ public class Table {
         return line(INTERSECTIONS[2]);
     }
 
+    private static String repeat(char c, int times) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < times; i ++) {
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
     private Table line(String chars) {
-        Ansi ansi = Ansi.ansi().fgBlack();
+        Ansi ansi = Ansi.ansi().fg(BLACK);
         for (int i = 0; i <= columns.size(); i++) {
             if (i == 0) {
-                ansi.a(chars.charAt(0));
-                for (int j = 0; j < columns.get(i).width + padding; j++) {
-                    ansi.a(H_BORDER);
-                }
+                ansi.a(chars.charAt(0)).a(repeat(H_BORDER, columns.get(i).width + padding));
             } else if (i == columns.size()) {
-                for (int j = 0; j < padding; j++) {
-                    ansi.a(H_BORDER);
-                }
-                ansi.a(chars.charAt(2));
+                ansi.a(repeat(H_BORDER, padding)).a(chars.charAt(2));
             } else {
-                for (int j = 0; j < padding; j++) {
-                    ansi.a(H_BORDER);
-                }
-                ansi.a(chars.charAt(1));
-                for (int j = 0; j < columns.get(i).width + padding; j++) {
-                    ansi.a(H_BORDER);
-                }
+                ansi.a(repeat(H_BORDER, padding)).a(chars.charAt(1)).a(repeat(H_BORDER, columns.get(i).width + padding));
             }
         }
-        out.println(ansi.toString());
+        out.println(ansi.reset().toString());
         return this;
     }
 
@@ -72,28 +68,17 @@ public class Table {
         Ansi ansi = Ansi.ansi();
         for (int i = 0; i <= columns.size(); i++) {
             if (i < columns.size()) {
-                ansi.fg(BLACK).a(V_BORDER).reset();
-                for (int j = 0; j < padding; j++) {
-                    ansi.a(' ');
-                }
+                ansi.fg(BLACK).a(V_BORDER).reset().a(repeat(' ', padding));
                 Column column = columns.get(i);
                 String field = data[i].toString();
                 AnsiString printable = new AnsiString(field);
                 int cellPadding = column.width - printable.length();
                 if (column.alignment == RIGHT) {
-                    for (int j = 0; j < cellPadding; j++) {
-                        ansi.a(' ');
-                    }
-                    ansi.a(field);
+                    ansi.a(repeat(' ', cellPadding)).a(field);
                 } else {
-                    ansi.a(field);
-                    for (int j = 0; j < cellPadding; j++) {
-                        ansi.a(' ');
-                    }
+                    ansi.a(field).a(repeat(' ', cellPadding));
                 }
-                for (int j = 0; j < padding; j++) {
-                    ansi.a(' ');
-                }
+                ansi.a(repeat(' ', padding));
             } else {
                 ansi.a(Ansi.ansi().fg(BLACK).a(V_BORDER).reset());
             }
