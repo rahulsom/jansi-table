@@ -1,0 +1,12 @@
+import nebula.plugin.release.ReleasePlugin
+
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath "com.netflix.nebula:nebula-release-plugin:10.1.1"
+    }
+}
+
+apply plugin: ReleasePlugin
