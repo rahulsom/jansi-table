@@ -17,3 +17,8 @@ apply plugin: NexusStagingPlugin
 project.afterEvaluate {
     tasks.release.dependsOn (closeAndReleaseRepository)
 }
+
+nexusStaging {
+    numberOfRetries = 30
+    delayBetweenRetriesInMillis = 5000
+}
