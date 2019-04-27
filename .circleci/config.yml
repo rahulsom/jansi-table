@@ -22,8 +22,10 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle.kts" }}
       - run: ./gradlew build
+      - store_test_results:
+          path: build/test-results
 
-  release:
+  releaseFinal:
     <<: *defaults
     steps:
       - checkout
@@ -37,6 +39,25 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle.kts" }}
       - run: ./gradlew -Prelease.useLastTag=true final
+      - store_test_results:
+          path: build/test-results
+
+  releaseCandidate:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle.kts" }}
+            - v1-dependencies-
+      - run: gradle dependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle.kts" }}
+      - run: ./gradlew -Prelease.useLastTag=true candidate
+      - store_test_results:
+          path: build/test-results
 
 workflows:
   version: 2
@@ -46,11 +67,21 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - release:
+
+      - releaseFinal:
           requires:
             - build
           filters:
             tags:
-              only: /^v.*/
+              only: /^v\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
+
+      - releaseCandidate:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+-rc\.\d+$/
             branches:
               ignore: /.*/
