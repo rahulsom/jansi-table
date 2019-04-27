@@ -1,4 +1,5 @@
 import nebula.plugin.release.ReleasePlugin
+import io.codearte.gradle.nexus.NexusStagingPlugin
 
 buildscript {
     repositories {
@@ -6,7 +7,13 @@ buildscript {
     }
     dependencies {
         classpath "com.netflix.nebula:nebula-release-plugin:10.1.1"
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.20.0"
     }
 }
 
 apply plugin: ReleasePlugin
+apply plugin: NexusStagingPlugin
+
+project.afterEvaluate {
+    tasks.release.dependsOn (closeAndReleaseRepository)
+}
