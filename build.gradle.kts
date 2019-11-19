@@ -18,5 +18,5 @@ dependencies {
     implementation("org.fusesource.jansi:jansi:1.17.1")
 
     testImplementation("org.codehaus.groovy:groovy:2.5.6")
-    testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
+    testImplementation("org.spockframework:spock-core:1.3-RC1-groovy-2.5")
 }
