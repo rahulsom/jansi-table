@@ -1,7 +1,7 @@
 plugins {
     `java-library`
     groovy
-    id("nebula.source-jar") version "14.1.1"
+    id("nebula.source-jar") version "15.0.3"
     id("nebula.javadoc-jar") version "15.0.3"
 }
 
