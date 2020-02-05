@@ -2,7 +2,7 @@ plugins {
     `java-library`
     groovy
     id("nebula.source-jar") version "15.0.3"
-    id("nebula.javadoc-jar") version "15.0.3"
+    id("nebula.javadoc-jar") version "16.0.0"
 }
 
 apply(from = "gradle/publishRoot.gradle")
