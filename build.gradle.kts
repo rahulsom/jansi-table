@@ -15,7 +15,7 @@ repositories {
 group = "com.github.rahulsom"
 
 dependencies {
-    implementation("org.fusesource.jansi:jansi:1.18")
+    implementation("org.fusesource.jansi:jansi:2.1.1")
 
     testImplementation("org.codehaus.groovy:groovy:2.5.9")
     testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
