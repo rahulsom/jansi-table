@@ -13,31 +13,52 @@ public class Table {
     private final List<Column> columns;
     private final int padding;
     private final PrintStream out;
+    private final Characters characters;
 
-    Table(List<Column> columns, int padding, PrintStream out) {
+    Table(List<Column> columns, int padding, PrintStream out, boolean fancy) {
         this.columns = columns;
         this.padding = padding;
         this.out = out;
+        if (fancy) {
+			this.characters = FANCY;
+		} else {
+        	this.characters = BASIC;
+		}
     }
 
-    private static final String[] INTERSECTIONS = {
-            "┌┬┐",
-            "├┼┤",
-            "└┴┘"
-    };
-    private static final char H_BORDER = '─';
-    private static final char V_BORDER = '│';
+    static class Characters {
+    	public final String[] intersections;
+    	public final char hBorder;
+    	public final char vBorder;
+
+		public Characters(String[] intersections, char hBorder, char vBorder) {
+			this.intersections = intersections;
+			this.hBorder = hBorder;
+			this.vBorder = vBorder;
+		}
+	}
+
+	static final Characters FANCY = new Characters(new String[]{
+			"┌┬┐",
+			"├┼┤",
+			"└┴┘"
+	}, '─', '│');
+	static final Characters BASIC = new Characters(new String[]{
+			"+++",
+			"+++",
+			"+++"
+	}, '-', '|');
 
     public Table printHeader() {
-        return line(INTERSECTIONS[0]);
+        return line(characters.intersections[0]);
     }
 
     public Table printDivider() {
-        return line(INTERSECTIONS[1]);
+        return line(characters.intersections[1]);
     }
 
     public Table printFooter() {
-        return line(INTERSECTIONS[2]);
+        return line(characters.intersections[2]);
     }
 
     private static String repeat(char c, int times) {
@@ -52,13 +73,13 @@ public class Table {
         Ansi ansi = Ansi.ansi().fg(BLACK);
         for (int i = 0; i <= columns.size(); i++) {
             if (i == 0) {
-                ansi.a(chars.charAt(0)).a(repeat(H_BORDER, columns.get(i).width + padding));
+                ansi.a(chars.charAt(0)).a(repeat(this.characters.hBorder, columns.get(i).width + padding));
             } else if (i == columns.size()) {
-                ansi.a(repeat(H_BORDER, padding)).a(chars.charAt(2));
+                ansi.a(repeat(this.characters.hBorder, padding)).a(chars.charAt(2));
             } else {
-                ansi.a(repeat(H_BORDER, padding))
+                ansi.a(repeat(this.characters.hBorder, padding))
                         .a(chars.charAt(1))
-                        .a(repeat(H_BORDER, columns.get(i).width + padding));
+                        .a(repeat(this.characters.hBorder, columns.get(i).width + padding));
             }
         }
         out.println(ansi.reset().toString());
@@ -79,7 +100,7 @@ public class Table {
         Ansi ansi = Ansi.ansi();
         for (int i = 0; i <= columns.size(); i++) {
             if (i < columns.size()) {
-                ansi.fg(BLACK).a(V_BORDER).reset().a(repeat(' ', padding));
+                ansi.fg(BLACK).a(this.characters.vBorder).reset().a(repeat(' ', padding));
                 Column column = columns.get(i);
                 Field field = data[i];
                 int cellPadding = column.width - field.width;
@@ -90,7 +111,7 @@ public class Table {
                 }
                 ansi.a(repeat(' ', padding));
             } else {
-                ansi.a(Ansi.ansi().fg(BLACK).a(V_BORDER).reset());
+                ansi.a(Ansi.ansi().fg(BLACK).a(this.characters.vBorder).reset());
             }
         }
         out.println(ansi);

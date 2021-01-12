@@ -12,6 +12,7 @@ public class TableBuilder {
     private List<Column> columns = new ArrayList<>();
     private int padding = 1;
     private OutputStream out = System.out;
+    private boolean fancy = true;
 
     public TableBuilder addColumn(Column column) {
         columns.add(column);
@@ -36,7 +37,17 @@ public class TableBuilder {
         return this;
     }
 
+    public TableBuilder fancy() {
+    	this.fancy = true;
+    	return this;
+	}
+
+    public TableBuilder basic() {
+    	this.fancy = false;
+    	return this;
+	}
+
     public Table build() {
-        return new Table(columns, padding, new PrintStream(out));
+        return new Table(columns, padding, new PrintStream(out), this.fancy);
     }
 }
