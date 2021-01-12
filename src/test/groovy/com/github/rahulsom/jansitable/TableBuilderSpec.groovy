@@ -1,5 +1,6 @@
 package com.github.rahulsom.jansitable
 
+
 import org.fusesource.jansi.AnsiString
 import spock.lang.Specification
 
@@ -23,14 +24,16 @@ class TableBuilderSpec extends Specification {
                 .print("Hello", 12)
                 .printFooter()
 
-        then:
-        new AnsiString(new String(baos.toByteArray())).plain == '''\
+        def expectation = '''\
             ┌────────────────────────────────┬────────────┐
             │ Text                           │     Number │
             ├────────────────────────────────┼────────────┤
             │ Hello                          │         12 │
             └────────────────────────────────┴────────────┘
             '''.stripIndent()
+        def actual = new String(baos.toByteArray())
+        then:
+        new AnsiString(actual).plain == expectation
 
     }
 }

@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+
 plugins {
     `java-library`
     groovy
@@ -19,4 +21,10 @@ dependencies {
 
     testImplementation("org.codehaus.groovy:groovy:2.5.9")
     testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
+}
+
+tasks.withType<Test> {
+  testLogging {
+    exceptionFormat = TestExceptionFormat.FULL
+  }
 }

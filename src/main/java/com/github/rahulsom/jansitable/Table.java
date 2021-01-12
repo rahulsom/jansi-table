@@ -1,9 +1,9 @@
 package com.github.rahulsom.jansitable;
 
 import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiString;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.github.rahulsom.jansitable.Column.Alignment.RIGHT;
@@ -42,7 +42,7 @@ public class Table {
 
     private static String repeat(char c, int times) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < times; i ++) {
+        for (int i = 0; i < times; i++) {
             sb.append(c);
         }
         return sb.toString();
@@ -56,7 +56,9 @@ public class Table {
             } else if (i == columns.size()) {
                 ansi.a(repeat(H_BORDER, padding)).a(chars.charAt(2));
             } else {
-                ansi.a(repeat(H_BORDER, padding)).a(chars.charAt(1)).a(repeat(H_BORDER, columns.get(i).width + padding));
+                ansi.a(repeat(H_BORDER, padding))
+                        .a(chars.charAt(1))
+                        .a(repeat(H_BORDER, columns.get(i).width + padding));
             }
         }
         out.println(ansi.reset().toString());
@@ -64,19 +66,27 @@ public class Table {
     }
 
     public Table print(Object... data) {
+        List<Field> list = new ArrayList<>();
+        for (Object it : data) {
+            list.add(it instanceof Field ? (Field) it : new Field(it.toString()));
+        }
+        Field[] fields = list.toArray(new Field[0]);
+        return print(fields);
+    }
+
+    public Table print(Field... data) {
         assert data.length == columns.size();
         Ansi ansi = Ansi.ansi();
         for (int i = 0; i <= columns.size(); i++) {
             if (i < columns.size()) {
                 ansi.fg(BLACK).a(V_BORDER).reset().a(repeat(' ', padding));
                 Column column = columns.get(i);
-                String field = data[i].toString();
-                AnsiString printable = new AnsiString(field);
-                int cellPadding = column.width - printable.length();
+                Field field = data[i];
+                int cellPadding = column.width - field.width;
                 if (column.alignment == RIGHT) {
-                    ansi.a(repeat(' ', cellPadding)).a(field);
+                    ansi.a(repeat(' ', cellPadding)).a(field.content);
                 } else {
-                    ansi.a(field).a(repeat(' ', cellPadding));
+                    ansi.a(field.content).a(repeat(' ', cellPadding));
                 }
                 ansi.a(repeat(' ', padding));
             } else {
