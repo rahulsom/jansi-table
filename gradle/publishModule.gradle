@@ -64,9 +64,5 @@ extraArchive {
     javadoc = false
 }
 
-nexus {
-    sign = !version.toString().contains('-SNAPSHOT')
-}
-
 rootProject.tasks.getByName('release').dependsOn(project.tasks.uploadArchives)
 rootProject.tasks.findByName('closeRepository').mustRunAfter(project.tasks.uploadArchives)

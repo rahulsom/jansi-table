@@ -15,7 +15,8 @@ apply plugin: ReleasePlugin
 apply plugin: NexusStagingPlugin
 
 project.afterEvaluate {
-    tasks.release.dependsOn (closeAndReleaseRepository)
+    tasks.getByName("final").dependsOn (closeAndReleaseRepository)
+    tasks.getByName("candidate").dependsOn (closeAndReleaseRepository)
 }
 
 nexusStaging {
