@@ -3,18 +3,25 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 plugins {
     `java-library`
     groovy
-    id("nebula.source-jar") version "17.3.2"
-    id("nebula.javadoc-jar") version "17.3.2"
+    id("com.github.rahulsom.waena.root").version("0.4.0")
+    id("com.github.rahulsom.waena.published").version("0.4.0")
 }
 
-apply(from = "gradle/publishRoot.gradle")
-apply(from = "gradle/publishModule.gradle")
-
 repositories {
-    jcenter()
+    mavenCentral()
+}
+
+configure<nebula.plugin.contacts.ContactsExtension> {
+    validateEmails = true
+    addPerson("rahulsom@noreply.github.com", closureOf<nebula.plugin.contacts.Contact> {
+        moniker("Rahul Somasunderam")
+        roles("owner")
+        github("https://github.com/rahulsom")
+    })
 }
 
 group = "com.github.rahulsom"
+description = "Build tables using jansi"
 
 dependencies {
     implementation("org.fusesource.jansi:jansi:1.18")
