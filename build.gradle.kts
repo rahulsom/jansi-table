@@ -26,7 +26,7 @@ description = "Build tables using jansi"
 dependencies {
     implementation("org.fusesource.jansi:jansi:1.18")
 
-    testImplementation("org.codehaus.groovy:groovy:3.0.8")
+    testImplementation("org.codehaus.groovy:groovy:3.0.9")
     testImplementation("org.spockframework:spock-core:2.0-groovy-3.0")
 }
 
