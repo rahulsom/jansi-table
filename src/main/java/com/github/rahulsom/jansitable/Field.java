@@ -1,6 +1,9 @@
 package com.github.rahulsom.jansitable;
 
-import org.fusesource.jansi.AnsiString;
+import org.fusesource.jansi.AnsiOutputStream;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class Field {
 	String content;
@@ -16,6 +19,24 @@ public class Field {
 	}
 
 	public Field(String content) {
-		this(content, new AnsiString(content).length());
+    this(content, chew(content).length());
 	}
+
+  private static CharSequence chew(final CharSequence str) {
+    assert str != null;
+
+    ByteArrayOutputStream buff = new ByteArrayOutputStream();
+    AnsiOutputStream out = new AnsiOutputStream(buff);
+
+    try {
+      out.write(str.toString().getBytes());
+      out.flush();
+      out.close();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    return buff.toString();
+  }
+
 }
