@@ -33,4 +33,5 @@ tasks.withType<Test> {
   testLogging {
     exceptionFormat = TestExceptionFormat.FULL
   }
+  useJUnitPlatform()
 }
