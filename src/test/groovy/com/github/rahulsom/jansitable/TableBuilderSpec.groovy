@@ -1,7 +1,6 @@
 package com.github.rahulsom.jansitable
 
 
-import org.fusesource.jansi.AnsiString
 import spock.lang.Specification
 
 import static com.github.rahulsom.jansitable.Column.Alignment.RIGHT
@@ -33,7 +32,7 @@ class TableBuilderSpec extends Specification {
             '''.stripIndent()
         def actual = new String(baos.toByteArray())
         then:
-        new AnsiString(actual).plain == expectation
+        Field.plain(actual) == expectation
 
     }
     def "build basic table"() {
@@ -63,7 +62,7 @@ class TableBuilderSpec extends Specification {
             '''.stripIndent()
         def actual = new String(baos.toByteArray())
         then:
-        new AnsiString(actual).plain == expectation
+        Field.plain(actual) == expectation
 
     }
 }
