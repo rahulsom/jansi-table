@@ -1,6 +1,14 @@
 package com.github.rahulsom.jansitable;
 
-import org.fusesource.jansi.AnsiString;
+import org.fusesource.jansi.AnsiColors;
+import org.fusesource.jansi.AnsiMode;
+import org.fusesource.jansi.AnsiType;
+import org.fusesource.jansi.io.AnsiOutputStream;
+import org.fusesource.jansi.io.AnsiProcessor;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class Field {
 	String content;
@@ -16,6 +24,20 @@ public class Field {
 	}
 
 	public Field(String content) {
-		this(content, new AnsiString(content).length());
+		this(content, plain(content).length());
 	}
+
+  static String plain(String input) {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    AnsiOutputStream out = new AnsiOutputStream(
+        baos, () -> 200, AnsiMode.Strip, new AnsiProcessor(baos),
+        AnsiType.VirtualTerminal, AnsiColors.Colors16, StandardCharsets.UTF_8,
+        () -> {}, () -> {}, true);
+    try {
+      out.write(input.getBytes());
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    return baos.toString();
+  }
 }
