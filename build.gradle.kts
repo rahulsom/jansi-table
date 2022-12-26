@@ -3,7 +3,7 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 plugins {
     `java-library`
     groovy
-    id("com.github.rahulsom.waena.root").version("0.4.0")
+    id("com.github.rahulsom.waena.root").version("0.6.1")
     id("com.github.rahulsom.waena.published").version("0.4.0")
 }
 
