@@ -24,7 +24,7 @@ group = "com.github.rahulsom"
 description = "Build tables using jansi"
 
 dependencies {
-    implementation("org.fusesource.jansi:jansi:2.4.0")
+    implementation("org.fusesource.jansi:jansi:2.4.1")
 
     testImplementation("org.spockframework:spock-core:2.3-groovy-4.0")
 }
