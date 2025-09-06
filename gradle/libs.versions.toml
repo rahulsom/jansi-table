@@ -1,7 +1,7 @@
 [versions]
 jansi = "2.4.2"
-junit = "5.9.1"
-junitPlatform = "1.9.1"
+junit = "5.13.4"
+junitPlatform = "1.13.4"
 waena = "0.16.0"
 
 [libraries]
