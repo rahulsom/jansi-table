@@ -1,0 +1,22 @@
+= Jansi Table
+:package: com.github.rahulsom
+:package-path: com/github/rahulsom
+:package-path-encoded: com%2Fgithub%2Frahulsom
+:snapshot-prefix: image:https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fcentral.sonatype.com%2Frepository%2Fmaven-snapshots%2F{package-path-encoded}%2F
+:snapshot-middle: %2Fmaven-metadata.xml&style=for-the-badge&label=S[alt=Maven Snapshot,height=30,link="https://central.sonatype.com/repository/maven-snapshots/{package-path}/
+:snapshot-suffix: /maven-metadata.xml"]
+:central-prefix: image:https://img.shields.io/maven-central/v/{package}/
+:central-middle: ?style=for-the-badge&label=R&color=green[alt=Maven Central Version,height=30,link="https://central.sonatype.com/artifact/{package}/
+:central-suffix: /overview"]
+:deprecated-middle: ?style=for-the-badge&label=R&color=lightgrey[alt=Maven Central Version,height=30,link="https://central.sonatype.com/artifact/{package}/
+
+image:https://img.shields.io/github/commits-since/rahulsom/jansi-table/latest?style=for-the-badge[GitHub commits since latest release, link="https://github.com/rahulsom/nothing/releases/new"]
+
+Creates tables using Jansi
+
+== Usage
+
+=== Available versions
+
+{central-prefix}jansi-table{central-middle}jansi-table{central-suffix}
+{snapshot-prefix}jansi-table{snapshot-middle}jansi-table{snapshot-suffix}
