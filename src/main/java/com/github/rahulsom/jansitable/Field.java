@@ -10,6 +10,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Represents a field in a table.
+ *
+ * @author Rahul Somasunderam
+ */
 public class Field {
 	String content;
 	/**
@@ -18,11 +23,22 @@ public class Field {
 	 */
 	int width;
 
+	/**
+	 * Creates a field with a given content and width.
+	 *
+	 * @param content The content of the field
+	 * @param width   The width of the field
+	 */
 	public Field(String content, int width) {
 		this.content = content;
 		this.width = width;
 	}
 
+	/**
+	 * Creates a field with a given content and calculates the width automatically.
+	 *
+	 * @param content The content of the field
+	 */
 	public Field(String content) {
 		this(content, plain(content).length());
 	}
