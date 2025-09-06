@@ -2,15 +2,13 @@
 jansi = "2.4.0"
 junit = "5.9.1"
 junitPlatform = "1.9.1"
-spock = "2.3-groovy-4.0"
 waena = "0.16.0"
 
 [libraries]
 jansi = { module = "org.fusesource.jansi:jansi", version.ref = "jansi" }
-junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
-junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junitPlatform" }
-spock-core = { module = "org.spockframework:spock-core", version.ref = "spock" }
 
 [plugins]
 waena-root = { id = "com.github.rahulsom.waena.root", version.ref = "waena" }

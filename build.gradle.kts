@@ -2,7 +2,6 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
     `java-library`
-    groovy
     alias(libs.plugins.waena.root)
     alias(libs.plugins.waena.published)
 }
@@ -26,9 +25,8 @@ description = "Build tables using jansi"
 dependencies {
     implementation(libs.jansi)
 
-    testImplementation(libs.spock.core)
-    testImplementation(libs.junit.api)
-    testRuntimeOnly(libs.junit.engine)
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
     testRuntimeOnly(libs.junit.platform.launcher)
 }
 
