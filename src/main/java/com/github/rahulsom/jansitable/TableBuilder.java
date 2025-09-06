@@ -8,45 +8,96 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A builder for {@link Table}
+ *
+ * @author Rahul Somasunderam
+ */
 public class TableBuilder {
     private List<Column> columns = new ArrayList<>();
     private int padding = 1;
     private OutputStream out = System.out;
     private boolean fancy = true;
 
+    /**
+     * Adds a column to the table.
+     *
+     * @param column The column to add
+     * @return The builder
+     */
     public TableBuilder addColumn(Column column) {
         columns.add(column);
         return this;
     }
 
+    /**
+     * Adds a column to the table.
+     *
+     * @param width     The width of the column
+     * @param alignment The alignment of the column
+     * @return The builder
+     */
     public TableBuilder addColumn(int width, Column.Alignment alignment) {
         return addColumn(new Column(width, alignment));
     }
 
+    /**
+     * Adds a column to the table.
+     *
+     * @param width The width of the column
+     * @return The builder
+     */
     public TableBuilder addColumn(int width) {
         return addColumn(new Column(width));
     }
 
+    /**
+     * Sets the padding of the table.
+     *
+     * @param padding The padding
+     * @return The builder
+     */
     public TableBuilder padding(int padding) {
         this.padding = padding;
         return this;
     }
 
+    /**
+     * Sets the output stream of the table.
+     *
+     * @param out The output stream
+     * @return The builder
+     */
     public TableBuilder writeTo(OutputStream out) {
         this.out = out;
         return this;
     }
 
+    /**
+     * Use fancy characters for the table.
+     *
+     * @return The builder
+     */
     public TableBuilder fancy() {
     	this.fancy = true;
     	return this;
 	}
 
+    /**
+     * Use basic characters for the table.
+     *
+     * @return The builder
+     */
     public TableBuilder basic() {
     	this.fancy = false;
     	return this;
 	}
 
+    /**
+     * Builds the table.
+     *
+     * @return The table
+     */
     public Table build() {
         return new Table(columns, padding, new PrintStream(out), this.fancy);
     }

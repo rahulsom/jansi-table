@@ -9,6 +9,11 @@ import java.util.List;
 import static com.github.rahulsom.jansitable.Column.Alignment.RIGHT;
 import static org.fusesource.jansi.Ansi.Color.BLACK;
 
+/**
+ * Renders a table to a PrintStream.
+ *
+ * @author Rahul Somasunderam
+ */
 public class Table {
     private final List<Column> columns;
     private final int padding;
@@ -49,14 +54,29 @@ public class Table {
 			"+++"
 	}, '-', '|');
 
+    /**
+     * Prints the header of the table.
+     *
+     * @return The table
+     */
     public Table printHeader() {
         return line(characters.intersections[0]);
     }
 
+    /**
+     * Prints a divider in the table.
+     *
+     * @return The table
+     */
     public Table printDivider() {
         return line(characters.intersections[1]);
     }
 
+    /**
+     * Prints the footer of the table.
+     *
+     * @return The table
+     */
     public Table printFooter() {
         return line(characters.intersections[2]);
     }
@@ -86,6 +106,12 @@ public class Table {
         return this;
     }
 
+    /**
+     * Prints a row in the table.
+     *
+     * @param data The data to print
+     * @return The table
+     */
     public Table print(Object... data) {
         List<Field> list = new ArrayList<>();
         for (Object it : data) {
@@ -95,6 +121,12 @@ public class Table {
         return print(fields);
     }
 
+    /**
+     * Prints a row in the table.
+     *
+     * @param data The data to print
+     * @return The table
+     */
     public Table print(Field... data) {
         assert data.length == columns.size();
         Ansi ansi = Ansi.ansi();
