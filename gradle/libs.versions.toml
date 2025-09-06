@@ -1,5 +1,5 @@
 [versions]
-jansi = "2.4.0"
+jansi = "2.4.2"
 junit = "5.9.1"
 junitPlatform = "1.9.1"
 spock = "2.3-groovy-4.0"
