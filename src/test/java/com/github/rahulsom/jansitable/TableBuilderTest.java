@@ -1,68 +1,66 @@
-package com.github.rahulsom.jansitable
+package com.github.rahulsom.jansitable;
 
+import org.junit.jupiter.api.Test;
 
-import spock.lang.Specification
+import java.io.ByteArrayOutputStream;
 
-import static com.github.rahulsom.jansitable.Column.Alignment.RIGHT
+import static com.github.rahulsom.jansitable.Column.Alignment.RIGHT;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TableBuilderSpec extends Specification {
-    def "build fancy table"() {
-        setup:
-        def baos = new ByteArrayOutputStream()
+class TableBuilderTest {
 
-        when:
-        def table = new TableBuilder()
+    @Test
+    void buildFancyTable() {
+        var baos = new ByteArrayOutputStream();
+
+        var table = new TableBuilder()
                 .addColumn(30)
                 .addColumn(10, RIGHT)
                 .writeTo(baos)
-                .build()
+                .build();
 
         table.printHeader()
                 .print("Text", "Number")
                 .printDivider()
                 .print("Hello", 12)
-                .printFooter()
+                .printFooter();
 
-        def expectation = '''\
+        var expectation = """
             ┌────────────────────────────────┬────────────┐
             │ Text                           │     Number │
             ├────────────────────────────────┼────────────┤
             │ Hello                          │         12 │
             └────────────────────────────────┴────────────┘
-            '''.stripIndent()
-        def actual = new String(baos.toByteArray())
-        then:
-        Field.plain(actual) == expectation
-
+            """.stripIndent();
+        var actual = new String(baos.toByteArray());
+        assertEquals(expectation, Field.plain(actual));
     }
-    def "build basic table"() {
-        setup:
-        def baos = new ByteArrayOutputStream()
 
-        when:
-        def table = new TableBuilder()
-				.basic()
+    @Test
+    void buildBasicTable() {
+        var baos = new ByteArrayOutputStream();
+
+        var table = new TableBuilder()
+                .basic()
                 .addColumn(30)
                 .addColumn(10, RIGHT)
                 .writeTo(baos)
-                .build()
+                .build();
 
         table.printHeader()
                 .print("Text", "Number")
                 .printDivider()
                 .print("Hello", 12)
-                .printFooter()
+                .printFooter();
 
-        def expectation = '''\
+        var expectation = """
             +--------------------------------+------------+
             | Text                           |     Number |
             +--------------------------------+------------+
             | Hello                          |         12 |
             +--------------------------------+------------+
-            '''.stripIndent()
-        def actual = new String(baos.toByteArray())
-        then:
-        Field.plain(actual) == expectation
-
+            """.stripIndent();
+        var actual = new String(baos.toByteArray());
+        assertEquals(expectation, Field.plain(actual));
     }
 }
