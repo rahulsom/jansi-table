@@ -10,7 +10,7 @@ repositories {
     mavenCentral()
 }
 
-configure<nebula.plugin.contacts.ContactsExtension> {
+contacts {
     validateEmails = true
     addPerson("rahulsom@noreply.github.com", closureOf<nebula.plugin.contacts.Contact> {
         moniker("Rahul Somasunderam")
