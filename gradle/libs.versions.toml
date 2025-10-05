@@ -2,7 +2,7 @@
 jansi = "2.4.2"
 junit = "6.0.0"
 junitPlatform = "6.0.0"
-waena = "0.18.1"
+waena = "0.19.0"
 
 [libraries]
 jansi = { module = "org.fusesource.jansi:jansi", version.ref = "jansi" }
