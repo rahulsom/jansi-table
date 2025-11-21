@@ -1,6 +1,4 @@
 name: Gradle Build
-permissions:
-  contents: read
 
 on:
   pull_request:
@@ -15,8 +13,15 @@ jobs:
     uses: rahulsom/_/.github/workflows/gradle.yml@main
     with:
       java-version: 17
+      codeql-actions: true
     secrets:
       ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.ORG_GRADLE_PROJECT_sonatypeUsername }}
       ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.ORG_GRADLE_PROJECT_sonatypePassword }}
       ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_signingKey }}
       ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ORG_GRADLE_PROJECT_signingPassword }}
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+      packages: read
+
