@@ -14,6 +14,13 @@ import java.util.List;
  * @author Rahul Somasunderam
  */
 public class TableBuilder {
+
+    /**
+     * Creates a new TableBuilder with default settings.
+     */
+    public TableBuilder() {
+    }
+
     private List<Column> columns = new ArrayList<>();
     private int padding = 1;
     private OutputStream out = System.out;
