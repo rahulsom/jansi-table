@@ -1,5 +1,5 @@
 [versions]
-jansi = "2.4.2"
+jansi = "2.4.3"
 junit = "6.0.3"
 junitPlatform = "6.0.3"
 waena = "0.24.0"
